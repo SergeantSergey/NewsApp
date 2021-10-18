@@ -11,7 +11,7 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
     }
 
     override fun initialViewState(): ViewState {
-        return ViewState(listOf(), false)
+        return ViewState(listOf(), false, "")
     }
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState {
@@ -40,7 +40,7 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
             }
 
             is DataEvent.ErrorNewsRequest -> {
-                return previousState.copy(isLoading = false)
+                return previousState.copy(isLoading = false, errorMessage = "Loading Error!")
             }
         }
         return previousState
