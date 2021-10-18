@@ -11,8 +11,8 @@ fun TopNewsModel.toDomain(): TopNewsDomainModel {
     return TopNewsDomainModel(
         status = this.status,
         totalResults = this.totalResults,
-        articles = this.articles.map {
-            it.toDomain()
+        articles = this.articles.map { articleModel ->
+            articleModel.toDomain()
         }
     )
 }
