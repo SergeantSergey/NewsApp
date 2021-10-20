@@ -5,5 +5,5 @@ import com.example.newsapp.feature.main.domain.model.TopNewsDomainModel
 
 interface NewsRepository {
 
-    suspend fun getTopNews(): List<ArticleDomainModel
+    suspend fun getTopNews(): List<ArticleDomainModel>
 }

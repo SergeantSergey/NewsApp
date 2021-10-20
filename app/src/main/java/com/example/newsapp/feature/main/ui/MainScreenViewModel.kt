@@ -11,7 +11,7 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
     }
 
     override fun initialViewState(): ViewState {
-        return ViewState(listOf(), false, "")
+        return ViewState(listOf(), true, null)
     }
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState {
@@ -19,6 +19,9 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
 
             is UiEvent.GetCurrentNews -> {
                 processDataEvent(DataEvent.OnLoadData)
+            }
+
+            is DataEvent.OnLoadData -> {
                 newsInteractor.getTopNews().fold(
                     onError = {
                         processDataEvent(
@@ -35,12 +38,8 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
                 return previousState.copy(articleList = event.articleList, isLoading = false)
             }
 
-            is DataEvent.OnLoadData -> {
-                return previousState.copy(isLoading = true)
-            }
-
             is DataEvent.ErrorNewsRequest -> {
-                return previousState.copy(isLoading = false, errorMessage = "Loading Error!")
+                return previousState.copy(isLoading = false, errorMessage = event.error)
             }
         }
         return previousState

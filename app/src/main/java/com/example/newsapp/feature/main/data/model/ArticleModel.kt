@@ -8,7 +8,7 @@ data class ArticleModel(
     val source: SourceModel,
 
     @SerializedName("author")
-    val author: String,
+    val author: String?,
 
     @SerializedName("title")
     val title: String,
@@ -26,6 +26,6 @@ data class ArticleModel(
     val publishedAt: String,
 
     @SerializedName("content")
-    val content: String,
+    val content: String?,
 
 )

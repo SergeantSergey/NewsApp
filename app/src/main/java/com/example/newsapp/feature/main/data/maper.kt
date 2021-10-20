@@ -9,9 +9,9 @@ import com.example.newsapp.feature.main.domain.model.TopNewsDomainModel
 
 fun TopNewsModel.toDomain(): TopNewsDomainModel {
     return TopNewsDomainModel(
-        status = this.status,
-        totalResults = this.totalResults,
-        articles = this.articles.map { articleModel ->
+        status = "0",
+        totalResults = 0,
+        articles = this.articles?.map { articleModel ->
             articleModel.toDomain()
         }
     )
@@ -20,19 +20,19 @@ fun TopNewsModel.toDomain(): TopNewsDomainModel {
 fun ArticleModel.toDomain(): ArticleDomainModel {
     return ArticleDomainModel(
         source = this.source.toDomain(),
-        author = this.author,
+        author = this.author ?: "No author",
         title = this.title,
         description = this.description,
         url = this.url,
         urlToImage = this.urlToImage,
         publishedAt = this.publishedAt,
-        content = this.content
+        content = this.content ?: "No content"
     )
 }
 
 fun SourceModel.toDomain(): SourceDomainModel {
     return SourceDomainModel(
-        id = this.id,
+        id = this.id ?: "No id",
         name = this.name
     )
 }

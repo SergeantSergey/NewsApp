@@ -6,7 +6,7 @@ import com.example.newsapp.feature.main.domain.model.ArticleDomainModel
 data class ViewState(
     val articleList: List<ArticleDomainModel>,
     val isLoading: Boolean,
-    val errorMessage:String
+    val errorMessage:String?
 )
 
 sealed class UiEvent : Event {
