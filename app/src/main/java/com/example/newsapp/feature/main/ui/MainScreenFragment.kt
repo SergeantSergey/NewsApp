@@ -4,17 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainScreenFragment : Fragment() {
 
     private val viewModel by viewModel<MainScreenViewModel>()
-    private var articleAdapter: ArticleAdapter? = null
+    private val articleAdapter: ArticleAdapter by lazy {
+        ArticleAdapter(mutableListOf())
+    }
+
+    private lateinit var progressBar: ProgressBar
+    private lateinit var tvError: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,10 +32,12 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun initRecyclerView(view: View) {
-        articleAdapter = ArticleAdapter(mutableListOf())
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvArticle)
+        progressBar = view.findViewById(R.id.pbLoading)
+        tvError = view.findViewById(R.id.tvError)
         recyclerView.adapter = articleAdapter
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.addItemDecoration(ArticleItemDecoration())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +48,20 @@ class MainScreenFragment : Fragment() {
         viewModel.viewState.observe(viewLifecycleOwner, ::render)
     }
 
-    fun render(viewState: ViewState) {
-        articleAdapter?.add(viewState.articleList)
-        Timber.e("TIMBER -> ${viewState.errorMessage}")
+    private fun updateLoading(isLoading: Boolean) {
+        progressBar.isVisible = isLoading
+    }
+
+    private fun updateErrorText(errorMessage: String?) {
+        with(tvError) {
+            isVisible = errorMessage != null
+            text = errorMessage
+        }
+    }
+
+    private fun render(viewState: ViewState) {
+        updateLoading(viewState.isLoading)
+        updateErrorText(viewState.errorMessage)
+        articleAdapter.add(viewState.articleList)
     }
 }

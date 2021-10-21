@@ -1,19 +1,21 @@
 package com.example.newsapp.feature.main.domain.model
 
+import com.example.newsapp.feature.main.domain.model.SourceDomainModel
+
 data class ArticleDomainModel(
     val source: SourceDomainModel,
 
-    val author: String,
+    val author: String?,
 
     val title: String,
 
-    val description: String,
+    val description: String?,
 
     val url: String,
 
-    val urlToImage: String,
+    val urlToImage: String?,
 
     val publishedAt: String,
 
-    val content: String,
+    val content: String?,
 )
