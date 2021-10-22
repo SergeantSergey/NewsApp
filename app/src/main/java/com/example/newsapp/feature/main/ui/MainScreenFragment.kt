@@ -16,8 +16,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainScreenFragment : Fragment() {
 
     private val viewModel by viewModel<MainScreenViewModel>()
+
     private val articleAdapter: ArticleAdapter by lazy {
-        ArticleAdapter(mutableListOf())
+        ArticleAdapter(
+            listArticle = mutableListOf(),
+            onClick = { articleDomainModel ->
+                viewModel.processUiEvent(UiEvent.OnArticleClick(articleDomainModel))
+            }
+        )
     }
 
     private lateinit var progressBar: ProgressBar

@@ -29,6 +29,6 @@ val mainScreenModule = module {
     }
 
     viewModel {
-        MainScreenViewModel(newsInteractor = get())
+        MainScreenViewModel(newsInteractor = get(), bookMarkInteractor = get())
     }
 }

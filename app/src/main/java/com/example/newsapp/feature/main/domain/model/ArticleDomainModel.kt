@@ -1,9 +1,6 @@
 package com.example.newsapp.feature.main.domain.model
 
-import com.example.newsapp.feature.main.domain.model.SourceDomainModel
-
 data class ArticleDomainModel(
-    val source: SourceDomainModel,
 
     val author: String?,
 
