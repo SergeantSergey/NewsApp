@@ -14,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ArticleAdapter(
-    private val listArticle: MutableList<ArticleDomainModel>
+    private val listArticle: MutableList<ArticleDomainModel>,
+    private val onClick: (ArticleDomainModel) -> Unit
 ) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(item: View) : RecyclerView.ViewHolder(item) {
@@ -43,6 +44,7 @@ class ArticleAdapter(
         with(holder) {
             tvTitle.text = listArticle[position].title
             tvContent.text = listArticle[position].description
+            itemView.setOnClickListener { onClick(listArticle[position]) }
             val date = parseData(listArticle[position].publishedAt)
             tvUpdatedAt.text = holder.itemView.resources.getString(R.string.publish_at, date)
             Glide

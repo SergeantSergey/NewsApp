@@ -27,5 +27,4 @@ data class ArticleModel(
 
     @SerializedName("content")
     val content: String?,
-
 )
