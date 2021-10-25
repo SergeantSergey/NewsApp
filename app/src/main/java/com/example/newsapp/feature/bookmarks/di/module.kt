@@ -20,4 +20,5 @@ val bookmarkModule = module {
     viewModel{
         BookmarksScreenViewModel(boolmarkInteractor = get())
     }
+    111
 }
