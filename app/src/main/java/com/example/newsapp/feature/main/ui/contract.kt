@@ -5,12 +5,21 @@ import com.example.newsapp.feature.main.domain.model.ArticleDomainModel
 
 data class ViewState(
     val articleList: List<ArticleDomainModel>,
+    val searchResult: List<ArticleDomainModel>,
     val isLoading: Boolean,
-    val errorMessage: String?
+    val errorMessage: String?,
+    val isSearchVisible: Boolean,
+    val searchText: String
 )
 
 sealed class UiEvent : Event {
     object GetCurrentNews : UiEvent()
+    object OnSearchClick : UiEvent()
+
+    data class OnSearchTextInput(
+        val searchText: String
+    ) : UiEvent()
+
     data class OnArticleClick(
         val articleDomainModel: ArticleDomainModel
     ) : UiEvent()

@@ -15,7 +15,14 @@ class MainScreenViewModel(
     }
 
     override fun initialViewState(): ViewState {
-        return ViewState(listOf(), true, null)
+        return ViewState(
+            articleList = listOf(),
+            searchResult = listOf(),
+            isLoading = true,
+            errorMessage = null,
+            isSearchVisible = false,
+            searchText = ""
+        )
     }
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
@@ -23,6 +30,17 @@ class MainScreenViewModel(
 
             is UiEvent.GetCurrentNews -> {
                 processDataEvent(DataEvent.OnLoadData)
+            }
+
+            is UiEvent.OnSearchClick -> {
+                return previousState.copy(isSearchVisible = !previousState.isSearchVisible)
+            }
+
+            is UiEvent.OnSearchTextInput -> {
+                val result = previousState.articleList.filter { articles ->
+                    articles.title.contains(event.searchText)
+                }
+                return previousState.copy(searchResult = result)
             }
 
             is UiEvent.OnArticleClick -> {
