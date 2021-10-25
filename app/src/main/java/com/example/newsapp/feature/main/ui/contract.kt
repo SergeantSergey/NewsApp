@@ -14,6 +14,9 @@ data class ViewState(
 sealed class UiEvent : Event {
     object GetCurrentNews : UiEvent()
     object OnSearchClick : UiEvent()
+    data class OnArticleClick(
+        val articleDomainModel: ArticleDomainModel
+    ) : UiEvent()
 }
 
 sealed class DataEvent : Event {

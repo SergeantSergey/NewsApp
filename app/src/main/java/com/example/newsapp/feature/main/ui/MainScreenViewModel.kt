@@ -2,9 +2,13 @@ package com.example.newsapp.feature.main.ui
 
 import com.example.newsapp.base.BaseViewModel
 import com.example.newsapp.base.Event
+import com.example.newsapp.feature.bookmarks.domain.BookmarkInteractor
 import com.example.newsapp.feature.main.domain.NewsInteractor
 
-class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<ViewState>() {
+class MainScreenViewModel(
+    val newsInteractor: NewsInteractor,
+    val bookMarkInteractor: BookmarkInteractor
+) : BaseViewModel<ViewState>() {
 
     init {
         processUiEvent(UiEvent.GetCurrentNews)
@@ -29,6 +33,10 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
 
             is UiEvent.OnSearchClick -> {
                 return previousState.copy(isLoading = !previousState.isSearchVisible)
+            }
+
+            is UiEvent.OnArticleClick -> {
+                bookMarkInteractor.insert(event.articleDomainModel)
             }
 
             is DataEvent.OnLoadData -> {
