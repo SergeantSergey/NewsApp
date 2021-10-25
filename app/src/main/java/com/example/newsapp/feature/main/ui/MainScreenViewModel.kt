@@ -11,7 +11,13 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
     }
 
     override fun initialViewState(): ViewState {
-        return ViewState(listOf(), true, null)
+        return ViewState(
+            articleList = listOf(),
+            isLoading = true,
+            errorMessage = null,
+            isSearchVisible = false,
+            searchText = ""
+        )
     }
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
@@ -19,6 +25,10 @@ class MainScreenViewModel(val newsInteractor: NewsInteractor) : BaseViewModel<Vi
 
             is UiEvent.GetCurrentNews -> {
                 processDataEvent(DataEvent.OnLoadData)
+            }
+
+            is UiEvent.OnSearchClick -> {
+                return previousState.copy(isLoading = !previousState.isSearchVisible)
             }
 
             is DataEvent.OnLoadData -> {

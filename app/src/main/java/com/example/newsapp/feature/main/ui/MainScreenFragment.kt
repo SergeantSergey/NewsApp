@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,11 +47,15 @@ class MainScreenFragment : Fragment() {
 
         initRecyclerView(view)
 
+        view.findViewById<ImageView>(R.id.btnSearch).setOnClickListener {
+            viewModel.processUiEvent(UiEvent.OnSearchClick)
+        }
+
         viewModel.viewState.observe(viewLifecycleOwner, ::render)
     }
 
     private fun updateLoading(isLoading: Boolean) {
-        progressBar.isVisible = isLoading
+        progressBar.isGone = !isLoading
     }
 
     private fun updateErrorText(errorMessage: String?) {

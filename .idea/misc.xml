@@ -5,10 +5,12 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.2601851851851852" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23425925925925925" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2572463768115942" />
-        <entry key="app/src/main/res/layout/fragment_mainscreen.xml" value="0.2572463768115942" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4511130216486494" />
+        <entry key="app/src/main/res/layout/fragment_bookmarks.xml" value="0.2930253623188406" />
+        <entry key="app/src/main/res/layout/fragment_mainscreen.xml" value="0.36015378744996546" />
         <entry key="app/src/main/res/layout/fragment_searchscreen.xml" value="0.2572463768115942" />
         <entry key="app/src/main/res/layout/item_article.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.40989583333333335" />
       </map>
     </option>
   </component>
