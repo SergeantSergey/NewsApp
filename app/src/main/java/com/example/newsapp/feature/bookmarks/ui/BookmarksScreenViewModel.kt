@@ -1,10 +1,12 @@
 package com.example.newsapp.feature.bookmarks.ui
 
-import androidx.lifecycle.ViewModel
 import com.example.newsapp.base.BaseViewModel
 import com.example.newsapp.base.Event
+import com.example.newsapp.feature.bookmarks.domain.BookmarkInteractor
 
-class BookmarksScreenViewModel : BaseViewModel<ViewState>() {
+class BookmarksScreenViewModel(
+    private val boolmarkInteractor: BookmarkInteractor
+) : BaseViewModel<ViewState>() {
     override fun initialViewState(): ViewState {
         return ViewState(
             articleList = listOf()

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/title_text_size"
             android:typeface="serif"
             tools:text="Title Text" />
 

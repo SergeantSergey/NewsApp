@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
@@ -42,7 +44,10 @@ class MainScreenFragment : Fragment() {
         progressBar = view.findViewById(R.id.pbLoading)
         tvError = view.findViewById(R.id.tvError)
         recyclerView.adapter = articleAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(
+            requireContext(),
+            resources.getInteger(R.integer.news_list_column_count)
+        )
         recyclerView.addItemDecoration(ArticleItemDecoration())
     }
 

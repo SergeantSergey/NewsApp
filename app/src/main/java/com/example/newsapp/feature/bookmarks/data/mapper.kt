@@ -1,5 +1,6 @@
 package com.example.newsapp.feature.bookmarks.data
 
+import androidx.room.TypeConverter
 import com.example.newsapp.feature.bookmarks.data.local.BookmarkEntity
 import com.example.newsapp.feature.main.domain.model.ArticleDomainModel
 
