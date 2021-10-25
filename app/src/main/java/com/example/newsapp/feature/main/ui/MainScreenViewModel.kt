@@ -17,6 +17,7 @@ class MainScreenViewModel(
     override fun initialViewState(): ViewState {
         return ViewState(
             articleList = listOf(),
+            searchResult = listOf(),
             isLoading = true,
             errorMessage = null,
             isSearchVisible = false,
@@ -32,7 +33,14 @@ class MainScreenViewModel(
             }
 
             is UiEvent.OnSearchClick -> {
-                return previousState.copy(isLoading = !previousState.isSearchVisible)
+                return previousState.copy(isSearchVisible = !previousState.isSearchVisible)
+            }
+
+            is UiEvent.OnSearchTextInput -> {
+                val result = previousState.articleList.filter { articles ->
+                    articles.title.contains(event.searchText)
+                }
+                return previousState.copy(searchResult = result)
             }
 
             is UiEvent.OnArticleClick -> {

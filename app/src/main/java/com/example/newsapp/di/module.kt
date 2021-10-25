@@ -11,7 +11,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "https://newsapi.org/v2/"
+const val BASE_URL = "https://newsapi.org/"
 const val DATA_BASE = "database-news"
 
 val appModule = module {

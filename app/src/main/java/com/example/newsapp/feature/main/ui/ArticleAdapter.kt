@@ -60,6 +60,7 @@ class ArticleAdapter(
     override fun getItemCount(): Int = listArticle.size
 
     fun add(listArticle: List<ArticleDomainModel>) {
+        this.listArticle.clear()
         this.listArticle.addAll(listArticle)
         notifyDataSetChanged()
     }

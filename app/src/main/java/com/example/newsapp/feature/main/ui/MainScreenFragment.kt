@@ -1,18 +1,16 @@
 package com.example.newsapp.feature.main.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,6 +30,8 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var tvError: TextView
+    private lateinit var frameSearch: FrameLayout
+    private lateinit var searchEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,11 +45,28 @@ class MainScreenFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvArticle)
         progressBar = view.findViewById(R.id.pbLoading)
         tvError = view.findViewById(R.id.tvError)
+        frameSearch = view.findViewById(R.id.frameSearch)
+        searchEditText = view.findViewById(R.id.etSearch)
         recyclerView.adapter = articleAdapter
         recyclerView.layoutManager = GridLayoutManager(
             requireContext(),
             resources.getInteger(R.integer.news_list_column_count)
         )
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.processUiEvent(UiEvent.OnSearchTextInput(p0.toString()))
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
+
         recyclerView.addItemDecoration(ArticleItemDecoration())
     }
 
@@ -79,6 +96,15 @@ class MainScreenFragment : Fragment() {
     private fun render(viewState: ViewState) {
         updateLoading(viewState.isLoading)
         updateErrorText(viewState.errorMessage)
-        articleAdapter.add(viewState.articleList)
+        showResult(viewState)
+        frameSearch.isGone = !viewState.isSearchVisible
+    }
+
+    private fun showResult(viewState: ViewState) {
+        if (viewState.isSearchVisible) {
+            articleAdapter.add(viewState.searchResult)
+        } else {
+            articleAdapter.add(viewState.articleList)
+        }
     }
 }
