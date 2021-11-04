@@ -3,4 +3,5 @@
     <string name="publish_at">Опубликовано %1$s</string>
     <string name="main">Главаная</string>
     <string name="bookmark">Закладки</string>
+    <string name="news">Новости</string>
 </resources>

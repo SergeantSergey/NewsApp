@@ -22,6 +22,19 @@
         app:layout_constraintTop_toTopOf="@id/toolBar"
         app:srcCompat="@drawable/ic_baseline_search_24" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/news"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar"
+        app:layout_constraintEnd_toStartOf="@id/btnSearch"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/frameSearch"
         android:layout_width="match_parent"
@@ -42,7 +55,6 @@
         android:id="@+id/rvArticle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
@@ -51,8 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_text_size"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

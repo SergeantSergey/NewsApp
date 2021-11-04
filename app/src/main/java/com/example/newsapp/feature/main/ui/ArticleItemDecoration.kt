@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 class ArticleItemDecoration : RecyclerView.ItemDecoration() {
 
     companion object {
-        private const val MARGIN_TOP = 10
-        private const val MARGIN_BOTTOM = 10
+        private const val MARGIN_TOP = 8
+        private const val MARGIN_BOTTOM = 8
         private const val MARGIN_LEFT = 16
         private const val MARGIN_RIGHT = 16
     }

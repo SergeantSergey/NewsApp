@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    app:cardCornerRadius="8dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/ivTitle"
@@ -24,7 +23,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:paddingTop="8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/title_text_size"
             android:typeface="serif"
@@ -34,15 +33,17 @@
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
             tools:text="TextContent" />
 
         <TextView
             android:id="@+id/tvUpdatedAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/text_size"
             tools:text="Дата публикации:" />
 
     </LinearLayout>
