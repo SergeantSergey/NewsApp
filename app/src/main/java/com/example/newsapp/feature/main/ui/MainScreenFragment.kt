@@ -22,8 +22,12 @@ class MainScreenFragment : Fragment() {
     private val articleAdapter: ArticleAdapter by lazy {
         ArticleAdapter(
             listArticle = mutableListOf(),
+            favoriteListArticle = mutableListOf(),
             onClick = { articleDomainModel ->
-                viewModel.processUiEvent(UiEvent.OnArticleClick(articleDomainModel))
+
+            },
+            onFavoriteClick = { articleDomainModel, isFavorite ->
+                viewModel.processUiEvent(UiEvent.OnFavoriteClick(articleDomainModel, isFavorite))
             }
         )
     }
@@ -97,6 +101,7 @@ class MainScreenFragment : Fragment() {
         updateLoading(viewState.isLoading)
         updateErrorText(viewState.errorMessage)
         showResult(viewState)
+        articleAdapter.addFavorite(viewState.favoriteList)
         frameSearch.isGone = !viewState.isSearchVisible
     }
 

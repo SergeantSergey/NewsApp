@@ -3,7 +3,6 @@ package com.example.newsapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.newsapp.feature.bookmarks.ui.BookmarksScreenFragment
 import com.example.newsapp.feature.main.ui.MainScreenFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

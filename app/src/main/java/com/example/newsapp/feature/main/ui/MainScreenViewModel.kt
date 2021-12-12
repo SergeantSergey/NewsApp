@@ -17,6 +17,7 @@ class MainScreenViewModel(
     override fun initialViewState(): ViewState {
         return ViewState(
             articleList = listOf(),
+            favoriteList = listOf(),
             searchResult = listOf(),
             isLoading = true,
             errorMessage = null,
@@ -30,6 +31,7 @@ class MainScreenViewModel(
 
             is UiEvent.GetCurrentNews -> {
                 processDataEvent(DataEvent.OnLoadData)
+                processDataEvent(DataEvent.OnLoadFavoriteData)
             }
 
             is UiEvent.OnSearchClick -> {
@@ -44,7 +46,16 @@ class MainScreenViewModel(
             }
 
             is UiEvent.OnArticleClick -> {
-                bookMarkInteractor.insert(event.articleDomainModel)
+
+            }
+
+            is UiEvent.OnFavoriteClick -> {
+                if (event.isFavorite) {
+                    bookMarkInteractor.delete(event.articleDomainModel)
+                } else {
+                    bookMarkInteractor.insert(event.articleDomainModel)
+                }
+                processDataEvent(DataEvent.OnLoadFavoriteData)
             }
 
             is DataEvent.OnLoadData -> {
@@ -58,6 +69,10 @@ class MainScreenViewModel(
                         processDataEvent(DataEvent.SuccessNewsRequest(it))
                     }
                 )
+            }
+
+            is DataEvent.OnLoadFavoriteData -> {
+                return previousState.copy(favoriteList = bookMarkInteractor.getAll())
             }
 
             is DataEvent.SuccessNewsRequest -> {

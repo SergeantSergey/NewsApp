@@ -15,7 +15,9 @@ import java.util.*
 
 class ArticleAdapter(
     private val listArticle: MutableList<ArticleDomainModel>,
-    private val onClick: (ArticleDomainModel) -> Unit
+    private val favoriteListArticle: MutableList<ArticleDomainModel>,
+    private val onClick: (ArticleDomainModel) -> Unit,
+    private val onFavoriteClick: (ArticleDomainModel, Boolean) -> Unit
 ) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(item: View) : RecyclerView.ViewHolder(item) {
@@ -24,6 +26,7 @@ class ArticleAdapter(
         var tvTitle: TextView = item.findViewById(R.id.tvTitle)
         var tvContent: TextView = item.findViewById(R.id.tvContent)
         var tvUpdatedAt: TextView = item.findViewById(R.id.tvUpdatedAt)
+        var ivFavorite: ImageView = item.findViewById(R.id.ivFavorite)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -47,6 +50,13 @@ class ArticleAdapter(
             itemView.setOnClickListener { onClick(listArticle[position]) }
             val date = parseData(listArticle[position].publishedAt)
             tvUpdatedAt.text = holder.itemView.resources.getString(R.string.publish_at, date)
+            val isFavorite = favoriteListArticle.contains(listArticle[position])
+            if (isFavorite) {
+                ivFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                ivFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
+            itemView.setOnClickListener { onFavoriteClick(listArticle[position], isFavorite) }
             Glide
                 .with(holder.itemView)
                 .load(listArticle[position].urlToImage)
@@ -62,6 +72,12 @@ class ArticleAdapter(
     fun add(listArticle: List<ArticleDomainModel>) {
         this.listArticle.clear()
         this.listArticle.addAll(listArticle)
+        notifyDataSetChanged()
+    }
+
+    fun addFavorite(favoriteListArticle: List<ArticleDomainModel>) {
+        this.favoriteListArticle.clear()
+        this.favoriteListArticle.addAll(favoriteListArticle)
         notifyDataSetChanged()
     }
 }
