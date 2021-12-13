@@ -45,10 +45,6 @@ class MainScreenViewModel(
                 return previousState.copy(searchResult = result)
             }
 
-            is UiEvent.OnArticleClick -> {
-
-            }
-
             is UiEvent.OnFavoriteClick -> {
                 if (event.isFavorite) {
                     bookMarkInteractor.delete(event.articleDomainModel)

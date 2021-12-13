@@ -4,11 +4,15 @@ import com.example.newsapp.base.Event
 import com.example.newsapp.feature.main.domain.model.ArticleDomainModel
 
 data class ViewState(
-    val articleList: List<ArticleDomainModel>
+    val articleFavoriteList: List<ArticleDomainModel>
 )
 
 sealed class DataEvent : Event {
-    data class SuccessNewsRequest(
-        val articleList: List<ArticleDomainModel>
-    ) : DataEvent()
+    object GetFavoriteNews : UiEvent()
+}
+
+sealed class UiEvent : Event {
+    data class OnFavoriteClick(
+        val articleDomainModel: ArticleDomainModel
+    ) : UiEvent()
 }

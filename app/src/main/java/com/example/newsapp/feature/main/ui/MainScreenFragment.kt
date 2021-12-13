@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -17,7 +15,7 @@ import com.example.newsapp.R
 import com.example.newsapp.feature.web.ui.WebActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainScreenFragment : Fragment() {
+class MainScreenFragment : Fragment(R.layout.fragment_mainscreen) {
 
     private val viewModel by viewModel<MainScreenViewModel>()
 
@@ -41,15 +39,7 @@ class MainScreenFragment : Fragment() {
     private lateinit var frameSearch: FrameLayout
     private lateinit var searchEditText: EditText
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_mainscreen, container, false)
-    }
-
-    private fun initRecyclerView(view: View) {
+    private fun initView(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvArticle)
         progressBar = view.findViewById(R.id.pbLoading)
         tvError = view.findViewById(R.id.tvError)
@@ -81,7 +71,7 @@ class MainScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView(view)
+        initView(view)
 
         view.findViewById<ImageView>(R.id.btnSearch).setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnSearchClick)

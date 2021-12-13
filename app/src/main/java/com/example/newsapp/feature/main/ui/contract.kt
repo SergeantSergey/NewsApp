@@ -21,10 +21,6 @@ sealed class UiEvent : Event {
         val searchText: String
     ) : UiEvent()
 
-    data class OnArticleClick(
-        val articleDomainModel: ArticleDomainModel
-    ) : UiEvent()
-
     data class OnFavoriteClick(
         val articleDomainModel: ArticleDomainModel,
         val isFavorite: Boolean
