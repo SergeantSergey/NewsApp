@@ -56,7 +56,7 @@ class ArticleAdapter(
             } else {
                 ivFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
-            itemView.setOnClickListener { onFavoriteClick(listArticle[position], isFavorite) }
+            ivFavorite.setOnClickListener { onFavoriteClick(listArticle[position], isFavorite) }
             Glide
                 .with(holder.itemView)
                 .load(listArticle[position].urlToImage)

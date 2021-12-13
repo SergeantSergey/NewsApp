@@ -1,5 +1,6 @@
 package com.example.newsapp.feature.main.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
+import com.example.newsapp.feature.web.ui.WebActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : Fragment() {
@@ -24,7 +26,9 @@ class MainScreenFragment : Fragment() {
             listArticle = mutableListOf(),
             favoriteListArticle = mutableListOf(),
             onClick = { articleDomainModel ->
-
+                val intent = Intent(requireActivity(), WebActivity::class.java)
+                intent.putExtra(WebActivity.URL, articleDomainModel.url)
+                startActivity(intent)
             },
             onFavoriteClick = { articleDomainModel, isFavorite ->
                 viewModel.processUiEvent(UiEvent.OnFavoriteClick(articleDomainModel, isFavorite))
